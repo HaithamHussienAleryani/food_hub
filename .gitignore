@@ -41,3 +41,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#lib
+/lib/firebase_options.dart
+
+
+#root
+/firebase.json
+/lib/features/Auth/

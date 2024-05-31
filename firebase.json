@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "food-hub-2c266",
+          "appId": "1:437740720235:android:5ea8029f6d8a40f1d0a12e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "food-hub-2c266",
+          "configurations": {
+            "android": "1:437740720235:android:5ea8029f6d8a40f1d0a12e",
+            "ios": "1:437740720235:ios:cf662b56f85039b2d0a12e"
+          }
+        }
+      }
+    }
+  },
+}
