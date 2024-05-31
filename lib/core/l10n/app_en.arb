@@ -1,0 +1,9 @@
+{
+  "helloWorld": "Welcome to",
+  "appName": "FoodHub",
+  "onboardingSubtitle": "Your favorite food delivered fast at your door",
+  "signIn": "Sign in with",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
+}
