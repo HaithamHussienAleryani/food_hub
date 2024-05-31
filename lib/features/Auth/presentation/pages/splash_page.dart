@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_hub/core/common/constants/images/images-constants.dart';
 import 'package:food_hub/core/common/widgets/vertical-space.dart';
@@ -31,9 +32,9 @@ class _SplashPageState extends State<SplashPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 93,
-              height: 93,
-              padding: const EdgeInsets.all(19),
+              width: 93.h,
+              height: 93.h,
+              padding: EdgeInsets.all(19.h),
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -46,11 +47,11 @@ class _SplashPageState extends State<SplashPage> {
                   borderRadius: BorderRadius.circular(24)),
               child: SvgPicture.asset(
                 appLogo,
-                width: 47.19,
-                height: 49.72,
+                width: 47.19.w,
+                height: 49.72.h,
               ),
             ),
-            const VerticalSpace(space: 10),
+            VerticalSpace(space: 10.h),
             SizedBox(child: SvgPicture.asset(appLogoName)),
           ],
         ),

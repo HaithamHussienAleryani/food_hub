@@ -3,7 +3,10 @@
   "appName": "FoodHub",
   "onboardingSubtitle": "Your favorite food delivered fast at your door",
   "signIn": "Sign in with",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  }
+  "onlySignIn": "Sign in",
+  "facebook": "facebook",
+  "google": "google",
+  "startWithEmail": "Or Start With Email",
+  "alreadyHaveAccount": "Already have an account? "
+
 }

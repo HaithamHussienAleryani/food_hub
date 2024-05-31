@@ -9,11 +9,13 @@ class OnboardingSubtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 0.5.sw,
+        width: 0.7.sw,
         child: Text(
           AppLocalizations.of(context)!.onboardingSubtitle,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: AppPallet.onboardingSubtitleColor, fontFamily: 'Sofia'),
+              fontSize: 16.sp,
+              color: AppPallet.onboardingSubtitleColor,
+              fontFamily: 'Sofia'),
         ));
   }
 }
