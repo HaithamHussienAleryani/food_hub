@@ -21,6 +21,7 @@ class FoodHub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return ScreenUtilInit(
       minTextAdapt: true,
       designSize: const Size(375, 812),

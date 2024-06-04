@@ -4,8 +4,11 @@
   "onboardingSubtitle": "طعامك المفضل سيصلك الى عتبة منزلك",
   "signIn": "تسجيل الدخول بواسطة",
   "onlySignIn": "تسجيل الدخول ",
+  "signUpWith": "انشاء حساب بواسطة ",
   "facebook": "فيسبوك",
   "google": "جوجل",
   "startWithEmail": " او ابداء بواسطة البريد الالكتروني",
-  "alreadyHaveAccount": "لديك حساب مسبقا؟ "
+  "alreadyHaveAccount": "لديك حساب مسبقا؟ ",
+  "signUp": "انشاء حساب",
+  "doNotHaveAccount": "ليس لديك حساب ؟ "
 }

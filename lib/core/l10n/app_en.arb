@@ -7,6 +7,9 @@
   "facebook": "facebook",
   "google": "google",
   "startWithEmail": "Or Start With Email",
-  "alreadyHaveAccount": "Already have an account? "
+  "alreadyHaveAccount": "Already have an account? ",
+  "signUp": "Sign Up",
+  "signUpWith": "Sign Up With",
+  "doNotHaveAccount": "Don't have an account? "
 
 }

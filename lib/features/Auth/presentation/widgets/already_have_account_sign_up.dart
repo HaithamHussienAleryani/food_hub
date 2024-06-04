@@ -1,12 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/core/utils/get_translation.dart';
 import 'package:go_router/go_router.dart';
 
-class AlreadyHaveAccountButton extends StatelessWidget {
-  const AlreadyHaveAccountButton({
+class AlreadyHaveAccountSignUp extends StatelessWidget {
+  const AlreadyHaveAccountSignUp({
     super.key,
   });
 
@@ -15,22 +15,22 @@ class AlreadyHaveAccountButton extends StatelessWidget {
     return Center(
       child: RichText(
         text: TextSpan(
-            text: AppLocalizations.of(context)!.alreadyHaveAccount,
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w800,
-                fontFamily: 'Sofia',
-                color: Colors.white),
+            text: getTranslation(context).alreadyHaveAccount,
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w300,
+              color: Colors.black,
+            ),
             children: [
               TextSpan(
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    context.goNamed('loginOnBoard');
+                    context.goNamed('loginSignUp');
                   },
-                text: AppLocalizations.of(context)!.onlySignIn,
+                text: getTranslation(context).onlySignIn,
                 style: const TextStyle(
                   decoration: TextDecoration.underline,
-                  color: AppPallet.whiteColor,
+                  color: AppPallet.primary,
                 ),
               )
             ]),

@@ -15,36 +15,36 @@ class SocialMediaButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 10.h),
-              decoration: BoxDecoration(
-                  color: AppPallet.whiteColor,
-                  borderRadius: BorderRadius.circular(27)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    facebook,
-                  ),
-                  HorizontalSpace(space: 10.w),
-                  Text(
-                    AppLocalizations.of(context)!.facebook.toUpperCase(),
-                    style: TextStyle(
-                      fontFamily: 'Sofia',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 13.sp,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-        HorizontalSpace(space: 40.w),
+        // Expanded(
+        //   child: GestureDetector(
+        //     onTap: () {},
+        //     child: Container(
+        //       padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 10.h),
+        //       decoration: BoxDecoration(
+        //           color: AppPallet.whiteColor,
+        //           borderRadius: BorderRadius.circular(27)),
+        //       child: Row(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         crossAxisAlignment: CrossAxisAlignment.center,
+        //         children: [
+        //           SvgPicture.asset(
+        //             facebook,
+        //           ),
+        //           HorizontalSpace(space: 10.w),
+        //           Text(
+        //             AppLocalizations.of(context)!.facebook.toUpperCase(),
+        //             style: TextStyle(
+        //               fontFamily: 'Sofia',
+        //               fontWeight: FontWeight.w500,
+        //               fontSize: 13.sp,
+        //             ),
+        //           )
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        // HorizontalSpace(space: 40.w),
         Expanded(
           child: GestureDetector(
             onTap: () {},
