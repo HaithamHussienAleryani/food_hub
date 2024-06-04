@@ -1,11 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_hub/core/routing/router.dart';
 import 'package:food_hub/core/theme/theme.dart';
+import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:food_hub/firebase_options.dart';
+import 'package:food_hub/init_dependencies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +16,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const FoodHub());
+  await initDependencies();
+  runApp(MultiBlocProvider(
+      providers: [BlocProvider(create: (_) => serviceLocator<AuthBloc>())],
+      child: const FoodHub()));
 }
 
 class FoodHub extends StatelessWidget {
