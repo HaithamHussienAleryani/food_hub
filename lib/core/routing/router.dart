@@ -2,6 +2,7 @@ import 'package:food_hub/features/Auth/presentation/pages/login_page.dart';
 import 'package:food_hub/features/Auth/presentation/pages/onboarding_page.dart';
 import 'package:food_hub/features/Auth/presentation/pages/sign_up_page.dart';
 import 'package:food_hub/features/Auth/presentation/pages/splash_page.dart';
+import 'package:food_hub/features/home/presentation/pages/home_page.dart';
 import 'package:go_router/go_router.dart';
 
 final routingConfiguration =
@@ -29,4 +30,6 @@ final routingConfiguration =
           builder: (context, _) => const LoginPage(),
         ),
       ]),
+  GoRoute(
+      path: '/home', name: 'home', builder: (context, _) => const HomePage()),
 ]);

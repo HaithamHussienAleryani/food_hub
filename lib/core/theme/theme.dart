@@ -38,6 +38,9 @@ class AppTheme {
       color: WidgetStatePropertyAll(AppPallet.backgroundColor),
       side: BorderSide.none,
     ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: AppPallet.primary,
+    ),
     scaffoldBackgroundColor: AppPallet.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
@@ -47,6 +50,8 @@ class AppTheme {
           fontWeight: FontWeight.w500,
           color: AppPallet.inputHint),
       focusedBorder: _border(color: AppPallet.primary),
+      focusedErrorBorder: _border(),
+      errorBorder: _border(),
     ),
   );
 }

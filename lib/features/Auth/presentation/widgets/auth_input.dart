@@ -6,10 +6,14 @@ import 'package:food_hub/core/theme/app_platte.dart';
 class AuthInput extends StatelessWidget {
   final String title;
   final TextInputType inputType;
+  final TextEditingController? controller;
+  final bool isObSecure;
   const AuthInput({
     super.key,
     required this.title,
+    this.controller,
     this.inputType = TextInputType.text,
+    this.isObSecure = false,
   });
 
   @override
@@ -24,9 +28,28 @@ class AuthInput extends StatelessWidget {
         ),
         VerticalSpace(space: 8.h),
         TextFormField(
+          controller: controller,
           keyboardType: inputType,
+          obscureText: isObSecure,
           cursorColor: AppPallet.inputHint,
           style: TextStyle(fontSize: 14.sp),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "$title is required";
+            }
+            if (inputType == TextInputType.emailAddress) {
+              final bool emailValid = RegExp(
+                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                  .hasMatch(value);
+              if (!emailValid) {
+                return 'Email is not valid';
+              }
+            }
+            if (isObSecure && value.length < 4) {
+              return 'Password must be more than 4 character';
+            }
+            return null;
+          },
           decoration: InputDecoration(
             hintText: title,
           ),

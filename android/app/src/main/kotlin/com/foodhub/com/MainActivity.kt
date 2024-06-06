@@ -1,4 +1,4 @@
-package com.foodhub.food_hub
+package com.foodhub.com
 
 import io.flutter.embedding.android.FlutterActivity
 

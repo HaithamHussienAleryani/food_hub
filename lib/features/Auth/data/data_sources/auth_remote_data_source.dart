@@ -8,6 +8,8 @@ abstract interface class AuthRemoteDataSource {
   Future<String> signUpWithGoogle();
   Future<String> signUpWithEmailAndPassword(
       {required String email, required String password});
+  Future<String> loginWithEmailAndPassword(
+      {required String email, required String password});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -20,8 +22,30 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<String> signUpWithEmailAndPassword(
-      {required String email, required String password}) {
-    throw UnimplementedError();
+      {required String email, required String password}) async {
+    try {
+      if (user == null) {
+        throw const ServerException("User is not found");
+      }
+
+      final credential = await firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      debugPrint(credential.user!.email);
+
+      return credential.user!.email ?? "";
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        throw const ServerException('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        throw const ServerException(
+            'The account already exists for that email.');
+      } else {
+        throw ServerException(e.message ?? "Error in auth");
+      }
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
   @override
@@ -44,6 +68,27 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       debugPrint("User Email is $userEmail");
 
       return userEmail;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<String> loginWithEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      if (user == null) {
+        throw const ServerException("User is not found");
+      }
+
+      final credential = await firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      debugPrint(credential.user!.email);
+
+      return credential.user!.email ?? "";
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message ?? "Firebase Error");
     } catch (e) {
       throw ServerException(e.toString());
     }
