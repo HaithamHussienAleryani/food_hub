@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_hub/core/common/constants/images/images-constants.dart';
 import 'package:food_hub/core/common/widgets/vertical-space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
@@ -14,12 +17,19 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut().then((value) {
+      context.read<AuthBloc>().add(AuthGetUserSession());
+      Future.delayed(const Duration(seconds: 5), () {
+        context.goNamed('onboarding');
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      context.goNamed('onboarding');
-    });
+    signOut();
   }
 
   @override

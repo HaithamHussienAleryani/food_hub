@@ -14,7 +14,7 @@ final class AuthLoadingViaEmail extends AuthState {}
 final class AuthLoadingViaEmailLogin extends AuthState {}
 
 final class AuthSuccess extends AuthState {
-  final String user;
+  final User? user;
   const AuthSuccess(this.user);
 }
 

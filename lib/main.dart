@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_hub/core/common/cubits/user_cubit/user_cubit.dart';
 import 'package:food_hub/core/routing/router.dart';
 import 'package:food_hub/core/theme/theme.dart';
 import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
@@ -17,9 +18,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await initDependencies();
-  runApp(MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => serviceLocator<AuthBloc>())],
-      child: const FoodHub()));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(
+      create: (_) => serviceLocator<UserCubit>(),
+    ),
+    BlocProvider(create: (_) => serviceLocator<AuthBloc>())
+  ], child: const FoodHub()));
 }
 
 class FoodHub extends StatelessWidget {

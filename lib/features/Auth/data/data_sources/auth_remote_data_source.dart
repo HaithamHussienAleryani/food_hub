@@ -5,11 +5,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 abstract interface class AuthRemoteDataSource {
   User? get user;
-  Future<String> signUpWithGoogle();
-  Future<String> signUpWithEmailAndPassword(
+  Future<User?> signUpWithGoogle();
+  Future<User?> signUpWithEmailAndPassword(
       {required String email, required String password});
-  Future<String> loginWithEmailAndPassword(
+  Future<User?> loginWithEmailAndPassword(
       {required String email, required String password});
+  Future<User?> getUserSession();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -21,7 +22,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   User? get user => firebaseAuth.currentUser;
 
   @override
-  Future<String> signUpWithEmailAndPassword(
+  Future<User?> signUpWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
       if (user == null) {
@@ -33,7 +34,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       debugPrint(credential.user!.email);
 
-      return credential.user!.email ?? "";
+      return credential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw const ServerException('The password provided is too weak.');
@@ -49,7 +50,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<String> signUpWithGoogle() async {
+  Future<User?> signUpWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -63,18 +64,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       var user = await firebaseAuth.signInWithCredential(credential);
 
-      String userEmail = user.user?.email ?? "";
-
-      debugPrint("User Email is $userEmail");
-
-      return userEmail;
+      return user.user;
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<String> loginWithEmailAndPassword(
+  Future<User?> loginWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
       if (user == null) {
@@ -84,13 +81,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final credential = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      debugPrint(credential.user!.email);
-
-      return credential.user!.email ?? "";
+      return credential.user;
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message ?? "Firebase Error");
     } catch (e) {
       throw ServerException(e.toString());
     }
+  }
+
+  @override
+  Future<User?> getUserSession() async {
+    return user;
   }
 }

@@ -7,6 +7,8 @@ sealed class AuthEvent {
 
 final class AuthSignUpViaGoogle extends AuthEvent {}
 
+final class AuthGetUserSession extends AuthEvent {}
+
 final class AuthSignUpViaEmailAndPassword extends AuthEvent {
   final String email;
   final String password;
