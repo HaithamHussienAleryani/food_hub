@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 
 class AppTheme {
   static _border({Color color = AppPallet.borderColor}) => OutlineInputBorder(
-        borderSide: BorderSide(color: color, width: 3),
+        borderSide: BorderSide(color: color, width: 1.w),
         borderRadius: BorderRadius.circular(10),
       );
   static final lightThemeMode = ThemeData.light().copyWith(
     textTheme: const TextTheme().copyWith(
       displayLarge: const TextStyle().copyWith(
-          fontFamily: 'Sofia',
+          fontFamily: 'Rubik',
           fontSize: 32,
           fontWeight: FontWeight.bold,
           color: Colors.black),
       displayMedium: const TextStyle().copyWith(
-          fontFamily: 'Sofia',
+          fontFamily: 'Rubik',
           fontSize: 24,
           fontWeight: FontWeight.bold,
           color: Colors.black),
       bodyLarge: const TextStyle().copyWith(
           color: Colors.black,
-          fontFamily: 'Sofia',
+          fontFamily: 'Rubik',
           fontSize: 16,
           fontWeight: FontWeight.normal),
       bodyMedium: const TextStyle().copyWith(
-          fontFamily: 'Sofia',
+          fontFamily: 'Rubik',
           fontSize: 14,
           fontWeight: FontWeight.normal,
           color: Colors.black),
@@ -37,11 +38,20 @@ class AppTheme {
       color: WidgetStatePropertyAll(AppPallet.backgroundColor),
       side: BorderSide.none,
     ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: AppPallet.primary,
+    ),
     scaffoldBackgroundColor: AppPallet.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.all(27),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
       enabledBorder: _border(),
-      focusedBorder: _border(color: AppPallet.borderColor),
+      hintStyle: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+          color: AppPallet.inputHint),
+      focusedBorder: _border(color: AppPallet.primary),
+      focusedErrorBorder: _border(),
+      errorBorder: _border(),
     ),
   );
 }
