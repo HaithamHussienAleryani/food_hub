@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,11 +17,12 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut().then((value) {
-      context.read<AuthBloc>().add(AuthGetUserSession());
-      Future.delayed(const Duration(seconds: 5), () {
-        context.goNamed('onboarding');
-      });
+    // await FirebaseAuth.instance.signOut().then((value) {
+    //
+    // });
+    context.read<AuthBloc>().add(AuthGetUserSession());
+    Future.delayed(const Duration(seconds: 5), () {
+      context.goNamed('onboarding');
     });
   }
 

@@ -11,6 +11,8 @@ import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:food_hub/firebase_options.dart';
 import 'package:food_hub/init_dependencies.dart';
 
+//TODO CHECK THE INTERNET CONNECTIVITY ACROSS THE APP
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();

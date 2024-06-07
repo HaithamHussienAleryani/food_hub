@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_hub/core/common/cubits/user_cubit/user_cubit.dart';
 import 'package:food_hub/features/Auth/data/data_sources/auth_remote_data_source.dart';
@@ -13,9 +14,11 @@ import 'package:get_it/get_it.dart';
 final serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
   _authInit();
   serviceLocator.registerLazySingleton(() => firebaseAuth);
+  serviceLocator.registerLazySingleton(() => fireStore);
   serviceLocator.registerLazySingleton(() => UserCubit());
 }
 
@@ -23,7 +26,7 @@ void _authInit() {
   //datasource
   serviceLocator
     ..registerFactory<AuthRemoteDataSource>(
-        () => AuthRemoteDataSourceImpl(serviceLocator()))
+        () => AuthRemoteDataSourceImpl(serviceLocator(), serviceLocator()))
     //repository
     ..registerFactory<AuthRepository>(
         () => AuthRepositoryImpl(serviceLocator()))

@@ -47,8 +47,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void signUpViaEmailAndPassword(
       AuthSignUpViaEmailAndPassword event, Emitter emit) async {
     emit(AuthLoadingViaEmail());
-    final response = await _userSignUpViaEmailAndPassword(
-        SignUpViaEmailParams(email: event.email, password: event.password));
+    final response = await _userSignUpViaEmailAndPassword(SignUpViaEmailParams(
+        email: event.email, password: event.password, name: event.name));
     response.fold((failure) => {emit(AuthFailed(failure.message))}, (user) {
       _userCubit.updateUser(user);
       emit(AuthSuccess(user));
@@ -58,8 +58,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void loginViaEmailAndPassword(
       AuthLoginViaEmailAndPassword event, Emitter emit) async {
     emit(AuthLoadingViaEmailLogin());
-    final response = await _userLoginViaEmailAndPassword(
-        SignUpViaEmailParams(email: event.email, password: event.password));
+    final response = await _userLoginViaEmailAndPassword(SignUpViaEmailParams(
+        email: event.email, password: event.password, name: ""));
     response.fold((failure) => {emit(AuthFailed(failure.message))}, (user) {
       _userCubit.updateUser(user);
       emit(AuthSuccess(user));

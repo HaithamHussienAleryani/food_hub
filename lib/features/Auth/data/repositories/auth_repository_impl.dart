@@ -20,10 +20,12 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, User?>> signUpWithEmailAndPassword(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String name}) async {
     try {
       return right(await authRemoteDataSource.signUpWithEmailAndPassword(
-          email: email, password: password));
+          email: email, password: password, name: name));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

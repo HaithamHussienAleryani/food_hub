@@ -11,13 +11,15 @@ class UserSignUpViaEmailAndPassword
   @override
   Future<Either<Failure, User?>> call(SignUpViaEmailParams params) async {
     return await authRepository.signUpWithEmailAndPassword(
-        email: params.email, password: params.password);
+        email: params.email, password: params.password, name: params.name);
   }
 }
 
 class SignUpViaEmailParams {
   final String email;
   final String password;
+  final String name;
 
-  SignUpViaEmailParams({required this.email, required this.password});
+  SignUpViaEmailParams(
+      {required this.email, required this.password, required this.name});
 }

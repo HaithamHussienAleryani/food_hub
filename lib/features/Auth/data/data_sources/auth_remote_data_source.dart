@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_hub/core/errors/exceptions.dart';
@@ -7,32 +8,37 @@ abstract interface class AuthRemoteDataSource {
   User? get user;
   Future<User?> signUpWithGoogle();
   Future<User?> signUpWithEmailAndPassword(
-      {required String email, required String password});
+      {required String email, required String password, required String name});
   Future<User?> loginWithEmailAndPassword(
       {required String email, required String password});
   Future<User?> getUserSession();
+  Future<void> getUserDocument({required User? user});
+  Future<void> setUserDocument({
+    required User? user,
+    required String email,
+    required String name,
+  });
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final FirebaseAuth firebaseAuth;
+  final FirebaseFirestore fireStore;
 
-  AuthRemoteDataSourceImpl(this.firebaseAuth);
+  AuthRemoteDataSourceImpl(this.firebaseAuth, this.fireStore);
 
   @override
   User? get user => firebaseAuth.currentUser;
 
   @override
   Future<User?> signUpWithEmailAndPassword(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String name}) async {
     try {
-      if (user == null) {
-        throw const ServerException("User is not found");
-      }
-
       final credential = await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      debugPrint(credential.user!.email);
+      await setUserDocument(user: credential.user, email: email, name: name);
 
       return credential.user;
     } on FirebaseAuthException catch (e) {
@@ -44,8 +50,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       } else {
         throw ServerException(e.message ?? "Error in auth");
       }
-    } catch (e) {
-      throw ServerException(e.toString());
+    } on ServerException catch (e) {
+      throw ServerException(e.message);
     }
   }
 
@@ -63,7 +69,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       var user = await firebaseAuth.signInWithCredential(credential);
-
+      setUserDocument(
+          user: user.user,
+          email: user.user!.email ?? "test@test.com",
+          name: user.user!.displayName ?? "testName");
       return user.user;
     } catch (e) {
       throw ServerException(e.toString());
@@ -91,6 +100,55 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<User?> getUserSession() async {
-    return user;
+    try {
+      await getUserDocument(user: user);
+      return user;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> getUserDocument({required User? user}) async {
+    try {
+      if (user == null) {
+        throw const ServerException("User is not found");
+      }
+      CollectionReference users = fireStore.collection('users');
+      final userInfo = await users.doc(user.uid).get();
+      debugPrint("User fetched data is ${userInfo.data()}");
+    } on ServerException catch (e) {
+      debugPrint(e.message);
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> setUserDocument(
+      {required User? user,
+      required String email,
+      required String name}) async {
+    try {
+      if (user == null) {
+        throw const ServerException("User is not found");
+      }
+      CollectionReference users = fireStore.collection('users');
+      users
+          .doc(user.uid)
+          .set({
+            "name": name,
+            "email": email,
+            "created_at": DateTime.now().toIso8601String(),
+          })
+          .then((value) => debugPrint('user added'))
+          .catchError((error) => debugPrint('Error adding user $error'));
+    } on ServerException catch (e) {
+      debugPrint(e.message);
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 }
