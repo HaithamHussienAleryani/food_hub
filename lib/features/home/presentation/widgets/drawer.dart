@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_hub/core/common/constants/images/images-constants.dart';
+import 'package:food_hub/core/common/widgets/horizontal-space.dart';
+import 'package:food_hub/core/common/widgets/vertical-space.dart';
+import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/features/home/presentation/widgets/drawer_list_item.dart';
 
 class AnimatedDrawer extends StatefulWidget {
   final Animation<double> menuScaleAnimation;
@@ -19,8 +25,8 @@ class _AnimatedDrawerState extends State<AnimatedDrawer> {
       position: widget.slideAnimation,
       child: ScaleTransition(
         scale: widget.menuScaleAnimation,
-        child: const Padding(
-          padding: EdgeInsets.only(left: 16.0),
+        child: Padding(
+          padding: EdgeInsets.only(left: 16.0, top: 10.h, bottom: 10.h),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Column(
@@ -28,20 +34,101 @@ class _AnimatedDrawerState extends State<AnimatedDrawer> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Dashboard",
-                    style: TextStyle(color: Colors.white, fontSize: 22)),
-                SizedBox(height: 10),
-                Text("Messages",
-                    style: TextStyle(color: Colors.white, fontSize: 22)),
-                SizedBox(height: 10),
-                Text("Services",
-                    style: TextStyle(color: Colors.white, fontSize: 22)),
-                SizedBox(height: 10),
-                Text("Abouts Us",
-                    style: TextStyle(color: Colors.white, fontSize: 22)),
-                SizedBox(height: 10),
-                Text("Contact Us",
-                    style: TextStyle(color: Colors.white, fontSize: 22)),
+                VerticalSpace(space: 43.h),
+                SizedBox(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        foregroundImage: const AssetImage(
+                          userPlaceHolder,
+                        ),
+                        radius: 45.h,
+                      ),
+                      VerticalSpace(space: 21.h),
+                      Text(
+                        "Haitham Hussien",
+                        style: TextStyle(
+                            fontSize: 18.sp, fontWeight: FontWeight.w600),
+                      ),
+                      VerticalSpace(space: 2.h),
+                      Text(
+                        "haitham@gmail.com",
+                        style: TextStyle(
+                            fontSize: 13.sp, color: AppPallet.textLightColor),
+                      ),
+                    ],
+                  ),
+                ),
+                VerticalSpace(space: 43.h),
+                SizedBox(
+                  child: Column(
+                    children: [
+                      DrawerListItem(
+                        icon: document,
+                        title: 'My Orders',
+                        onTap: () {},
+                      ),
+                      DrawerListItem(
+                        icon: profile,
+                        title: 'My Profile',
+                        onTap: () {},
+                      ),
+                      DrawerListItem(
+                        icon: location,
+                        title: 'Delivery Address',
+                        onTap: () {},
+                      ),
+                      DrawerListItem(
+                        icon: message,
+                        title: 'Contact Us',
+                        onTap: () {},
+                      ),
+                      DrawerListItem(
+                        icon: settings,
+                        title: 'Settings',
+                        onTap: () {},
+                      ),
+                      DrawerListItem(
+                        icon: helps,
+                        title: 'Helps & FAQs',
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+                VerticalSpace(space: 20.h),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    elevation: const WidgetStatePropertyAll(10),
+                    padding: WidgetStatePropertyAll(
+                        EdgeInsets.symmetric(vertical: 2.h, horizontal: 12.w)),
+                    shadowColor: WidgetStatePropertyAll(
+                        AppPallet.shadowColor.withOpacity(0.26)),
+                    backgroundColor:
+                        const WidgetStatePropertyAll(AppPallet.primary),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.power_settings_new,
+                        color: AppPallet.whiteColor,
+                        size: 30.h,
+                      ),
+                      HorizontalSpace(space: 9.w),
+                      Text(
+                        "Log Out",
+                        style: TextStyle(
+                            fontSize: 16.sp,
+                            letterSpacing: 1,
+                            color: AppPallet.whiteColor),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
