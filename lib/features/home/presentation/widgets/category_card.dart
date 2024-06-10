@@ -18,44 +18,41 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 12.w),
-      child: SizedBox(
-        height: 130.h,
-        child: Card(
-          elevation: 10,
-          color: isActive ? AppPallet.primary : AppPallet.whiteColor,
-          shadowColor: AppPallet.shadowColor.withOpacity(0.5),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100.r)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 1),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    padding: EdgeInsets.all(7.sp),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppPallet.primary),
-                      color: AppPallet.whiteColor,
-                    ),
-                    child: SvgPicture.asset(icon,
-                        height: 32.h,
-                        width: 32.h,
-                        colorFilter: const ColorFilter.mode(
-                            AppPallet.primary, BlendMode.srcIn)),
+      child: Card(
+        elevation: 10,
+        color: isActive ? AppPallet.primary : AppPallet.whiteColor,
+        shadowColor: AppPallet.shadowColor.withOpacity(0.5),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 13.h, top: 3.h),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  padding: EdgeInsets.all(7.sp),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppPallet.primary),
+                    color: AppPallet.whiteColor,
                   ),
+                  child: SvgPicture.asset(icon,
+                      height: 32.h,
+                      width: 32.h,
+                      colorFilter: const ColorFilter.mode(
+                          AppPallet.primary, BlendMode.srcIn)),
                 ),
-                VerticalSpace(space: 10.h),
-                Text(
-                  title,
-                  style: TextStyle(
-                      fontSize: 11.sp,
-                      color: isActive ? AppPallet.whiteColor : Colors.black),
-                ),
-              ],
-            ),
+              ),
+              VerticalSpace(space: 10.h),
+              Text(
+                title,
+                style: TextStyle(
+                    fontSize: 11.sp,
+                    color: isActive ? AppPallet.whiteColor : Colors.black),
+              ),
+            ],
           ),
         ),
       ),
