@@ -102,7 +102,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ),
                   VerticalSpace(space: 20.h),
                   SizedBox(
-                    height: 130.h,
+                    height: 145.h,
                     child: const SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
