@@ -7,7 +7,9 @@ class AppPallet {
   static const Color primaryLight = Color(0xFFFFECE7);
   static const Color inputTitle = Color(0xFF9796A1);
   static const Color inputHint = Color(0xFFC4C4C4);
+  static const Color scaffoldBackgroundColor = Color(0xFFFDFCFC);
   static const Color drawerBackground = Color(0xFFFFFEFE);
+  static const Color inputColor = Color(0xFFEFEFEF);
   static const Color shadowColor = Color(0xFFD3D1D8);
   static const Color shadowColorYellow = Color(0xFFFFC529);
   static const Color textLightColor = Color(0xFF9EA1B1);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food_hub/core/common/widgets/vertical-space.dart';
+import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 
 class AuthInput extends StatelessWidget {

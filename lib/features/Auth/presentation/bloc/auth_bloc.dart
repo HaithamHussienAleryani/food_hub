@@ -1,12 +1,12 @@
-import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_hub/core/common/cubits/user_cubit/user_cubit.dart';
 import 'package:food_hub/core/usecase/usecase.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_get_session.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_login_via_email_and_password.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_sign_up_via_email_and_password.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_sign_up_via_google.dart';
-import 'package:meta/meta.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

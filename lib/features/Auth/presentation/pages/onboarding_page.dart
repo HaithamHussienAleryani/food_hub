@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food_hub/core/common/constants/images/images-constants.dart';
-import 'package:food_hub/core/common/widgets/vertical-space.dart';
+import 'package:food_hub/core/common/constants/images/images_constants.dart';
+import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 import 'package:food_hub/features/Auth/presentation/widgets/already_have_acount_button.dart';
 import 'package:food_hub/features/Auth/presentation/widgets/login_with_email_button.dart';

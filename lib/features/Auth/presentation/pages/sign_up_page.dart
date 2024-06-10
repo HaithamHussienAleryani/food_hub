@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food_hub/core/common/widgets/vertical-space.dart';
+import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 import 'package:food_hub/core/utils/get_translation.dart';
 import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';

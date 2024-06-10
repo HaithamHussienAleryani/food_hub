@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_hub/core/common/widgets/horizontal-space.dart';
+import 'package:food_hub/core/common/widgets/horizontal_space.dart';
 
 class DrawerListItem extends StatelessWidget {
   final String icon;

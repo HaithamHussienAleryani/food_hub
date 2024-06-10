@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_hub/core/common/constants/images/images-constants.dart';
+import 'package:food_hub/core/common/constants/images/images_constants.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 
 class Appbar extends StatefulWidget {

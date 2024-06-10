@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_hub/core/theme/app_platte.dart';
 import 'package:food_hub/features/home/presentation/widgets/drawer.dart';
 import 'package:food_hub/features/home/presentation/widgets/home.dart';
 
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage>
     screenWidth = size.width;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: AppPallet.scaffoldBackgroundColor,
       body: Stack(
         children: <Widget>[
           AnimatedDrawer(
