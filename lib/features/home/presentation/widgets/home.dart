@@ -7,6 +7,7 @@ import 'package:food_hub/core/theme/app_platte.dart';
 import 'package:food_hub/features/home/presentation/widgets/appbar.dart';
 import 'package:food_hub/features/home/presentation/widgets/category_card.dart';
 import 'package:food_hub/features/home/presentation/widgets/featured_restaurant_card.dart';
+import 'package:food_hub/features/home/presentation/widgets/meal_card.dart';
 
 class HomeWidget extends StatefulWidget {
   final Duration duration;
@@ -69,7 +70,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                       child: Text(
                         "What would you like to order",
                         style: TextStyle(
-                            fontSize: 25.sp, fontWeight: FontWeight.bold),
+                            height: 1.7.h,
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w900),
                       ),
                     ),
                   ),
@@ -142,7 +145,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         Text(
                           'Featured Restaurants',
                           style: TextStyle(
-                              fontSize: 18.sp, fontWeight: FontWeight.w500),
+                              fontSize: 18.sp, fontWeight: FontWeight.w700),
                         ),
                         Text(
                           "View all",
@@ -168,7 +171,42 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                     ),
                   ),
-                  VerticalSpace(space: 0.5.sh),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Popular items',
+                          style: TextStyle(
+                              fontSize: 18.sp, fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          "View all",
+                          style: TextStyle(
+                              fontSize: 13.sp, color: AppPallet.primary),
+                        ),
+                      ],
+                    ),
+                  ),
+                  VerticalSpace(space: 15.h),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: SizedBox(
+                      height: 300.h,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const MealCard(),
+                          const MealCard(),
+                          const MealCard(),
+                          HorizontalSpace(space: 16.w),
+                        ],
+                      ),
+                    ),
+                  ),
+                  VerticalSpace(space: 0.05.sh),
                 ],
               ),
             ),

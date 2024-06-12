@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/features/home/presentation/widgets/bottom_navigation_item.dart';
 import 'package:food_hub/features/home/presentation/widgets/drawer.dart';
 import 'package:food_hub/features/home/presentation/widgets/home.dart';
 
@@ -46,6 +48,29 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       backgroundColor: AppPallet.scaffoldBackgroundColor,
+      bottomNavigationBar: SizedBox(
+        height: 74.h,
+        child: BottomNavigationBar(
+          showSelectedLabels: false,
+          enableFeedback: false,
+          backgroundColor: AppPallet.scaffoldBackgroundColor,
+          showUnselectedLabels: false,
+          landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+          iconSize: 27.sp,
+          selectedFontSize: 0,
+          unselectedFontSize: 0,
+          unselectedItemColor: AppPallet.inputHint,
+          selectedItemColor: AppPallet.primary,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            getBottomNavItem(Icons.home_filled, 0),
+            getBottomNavItem(Icons.location_pin, 0),
+            getBottomNavItem(Icons.shopping_bag_rounded, 2),
+            getBottomNavItem(Icons.favorite, 0),
+            getBottomNavItem(Icons.notifications_rounded, 6)
+          ],
+        ),
+      ),
       body: Stack(
         children: <Widget>[
           AnimatedDrawer(
