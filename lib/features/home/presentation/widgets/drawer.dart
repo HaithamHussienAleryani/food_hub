@@ -64,6 +64,8 @@ class _AnimatedDrawerState extends State<AnimatedDrawer> {
                 VerticalSpace(space: 43.h),
                 SizedBox(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       DrawerListItem(
                         icon: document,
@@ -112,17 +114,19 @@ class _AnimatedDrawerState extends State<AnimatedDrawer> {
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.power_settings_new,
                         color: AppPallet.whiteColor,
-                        size: 30.h,
+                        size: 20.sp,
                       ),
                       HorizontalSpace(space: 9.w),
                       Text(
                         "Log Out",
                         style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             letterSpacing: 1,
                             color: AppPallet.whiteColor),
                       ),

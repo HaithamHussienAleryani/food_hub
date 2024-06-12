@@ -17,13 +17,15 @@ class DrawerListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 36.h),
+      padding: EdgeInsets.only(bottom: 25.h),
       child: GestureDetector(
         onTap: onTap,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(icon),
+            SvgPicture.asset(
+              icon,
+            ),
             HorizontalSpace(space: 14.w),
             Text(
               title,

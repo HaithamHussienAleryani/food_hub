@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_hub/core/common/constants/animations/animation_constant.dart';
 import 'package:food_hub/core/common/constants/images/images_constants.dart';
 import 'package:food_hub/core/common/widgets/horizontal_space.dart';
 import 'package:food_hub/core/common/widgets/vertical_space.dart';
@@ -8,6 +10,8 @@ import 'package:food_hub/features/home/presentation/widgets/appbar.dart';
 import 'package:food_hub/features/home/presentation/widgets/category_card.dart';
 import 'package:food_hub/features/home/presentation/widgets/featured_restaurant_card.dart';
 import 'package:food_hub/features/home/presentation/widgets/meal_card.dart';
+import 'package:food_hub/features/home/presentation/widgets/offer_card.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeWidget extends StatefulWidget {
   final Duration duration;
@@ -30,6 +34,10 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  //TODO FIND FOOD NEAR ME
+  //TODO TRANSLATE ALL PREVIOUS WORK
+  //TODO CREATE SEARCH FULL PAGE MODAL SHEET
+  //TODO MAKE ALL SECTIONS A COMPONENTS
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
@@ -43,14 +51,16 @@ class _HomeWidgetState extends State<HomeWidget> {
         child: Material(
           animationDuration: widget.duration,
           color: AppPallet.scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(widget.isCollapsed ? 0 : 25),
+          borderRadius: BorderRadius.circular(widget.isCollapsed ? 0 : 25.r),
           elevation: 20,
           shadowColor: AppPallet.shadowColor.withOpacity(0.2),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            physics: const ClampingScrollPhysics(),
+            physics: !widget.isCollapsed
+                ? const NeverScrollableScrollPhysics()
+                : const ClampingScrollPhysics(),
             child: Container(
-              padding: const EdgeInsets.only(top: 48),
+              padding: EdgeInsets.only(top: 48.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -71,7 +81,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         "What would you like to order",
                         style: TextStyle(
                             height: 1.7.h,
-                            fontSize: 25.sp,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.w900),
                       ),
                     ),
@@ -104,11 +114,57 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ),
                   VerticalSpace(space: 20.h),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SizedBox(
+                      width: 0.70.sw,
+                      child: Row(
+                        children: [
+                          Text(
+                            "Offers of the day",
+                            style: TextStyle(
+                                height: 1.7.h,
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w900),
+                          ),
+                          HorizontalSpace(space: 10.w),
+                          Lottie.asset(offerAnimation,
+                              repeat: true, reverse: true),
+                        ],
+                      ),
+                    ),
+                  ),
+                  VerticalSpace(space: 19.h),
+                  SizedBox(
+                    height: 200.h,
+                    child: CarouselSlider(
+                        options: CarouselOptions(
+                            height: 400.0,
+                            autoPlay: widget.isCollapsed,
+                            enlargeCenterPage: true,
+                            disableCenter: true,
+                            animateToClosest: true),
+                        items: const [
+                          OfferCard(
+                            offer: offerOne,
+                          ),
+                          OfferCard(
+                            offer: offerTwo,
+                          ),
+                          OfferCard(
+                            offer: offerThree,
+                          ),
+                        ]),
+                  ),
+                  VerticalSpace(space: 20.h),
                   SizedBox(
                     height: 145.h,
-                    child: const SingleChildScrollView(
+                    child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: Row(
+                      physics: !widget.isCollapsed
+                          ? const NeverScrollableScrollPhysics()
+                          : const ClampingScrollPhysics(),
+                      child: const Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CategoryCard(
@@ -137,7 +193,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -172,7 +228,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -206,7 +262,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                     ),
                   ),
-                  VerticalSpace(space: 0.05.sh),
                 ],
               ),
             ),

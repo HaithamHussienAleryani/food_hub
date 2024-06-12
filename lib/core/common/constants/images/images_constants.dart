@@ -21,3 +21,6 @@ const String burger = "$svgPath/burger.svg";
 const String onBoardingImage = "$imagesPath/onboarding.png";
 const String userPlaceHolder = "$imagesPath/user-placeholder.png";
 const String mealOne = "$imagesPath/meal_one.png";
+const String offerOne = "$imagesPath/offer_one.jpg";
+const String offerTwo = "$imagesPath/offer_2.jpg";
+const String offerThree = "$imagesPath/offer_3.jpg";

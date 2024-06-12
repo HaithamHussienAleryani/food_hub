@@ -7,7 +7,7 @@ BottomNavigationBarItem getBottomNavItem(IconData icons, int count) =>
         icon: Badge(
           isLabelVisible: count > 0,
           offset: Offset(7.w, -12.h),
-          backgroundColor: Color(0xffFFC529),
+          backgroundColor: const Color(0xffFFC529),
           alignment: Alignment.topRight,
           label: Text(count.toString()),
           child: Icon(
