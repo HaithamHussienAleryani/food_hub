@@ -10,22 +10,22 @@ class AppTheme {
   static final lightThemeMode = ThemeData.light().copyWith(
     textTheme: const TextTheme().copyWith(
       displayLarge: const TextStyle().copyWith(
-          fontFamily: 'Rubik',
+          fontFamily: 'Nunito',
           fontSize: 32,
           fontWeight: FontWeight.bold,
           color: Colors.black),
       displayMedium: const TextStyle().copyWith(
-          fontFamily: 'Rubik',
+          fontFamily: 'Nunito',
           fontSize: 24,
           fontWeight: FontWeight.bold,
           color: Colors.black),
       bodyLarge: const TextStyle().copyWith(
           color: Colors.black,
-          fontFamily: 'Rubik',
+          fontFamily: 'Nunito',
           fontSize: 16,
           fontWeight: FontWeight.normal),
       bodyMedium: const TextStyle().copyWith(
-          fontFamily: 'Rubik',
+          fontFamily: 'Nunito',
           fontSize: 14,
           fontWeight: FontWeight.normal,
           color: Colors.black),

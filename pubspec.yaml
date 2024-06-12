@@ -101,22 +101,22 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Rubik
+    - family: Nunito
       fonts:
-        - asset: assets/fonts/Rubik-Black.ttf
-        - asset: assets/fonts/Rubik-BlackItalic.ttf
-        - asset: assets/fonts/Rubik-Bold.ttf
-        - asset: assets/fonts/Rubik-BoldItalic.ttf
-        - asset: assets/fonts/Rubik-ExtraBold.ttf
-        - asset: assets/fonts/Rubik-ExtraBoldItalic.ttf
-        - asset: assets/fonts/Rubik-Italic.ttf
-        - asset: assets/fonts/Rubik-Light.ttf
-        - asset: assets/fonts/Rubik-LightItalic.ttf
-        - asset: assets/fonts/Rubik-Medium.ttf
-        - asset: assets/fonts/Rubik-MediumItalic.ttf
-        - asset: assets/fonts/Rubik-Regular.ttf
-        - asset: assets/fonts/Rubik-SemiBold.ttf
-        - asset: assets/fonts/Rubik-SemiBoldItalic.ttf
+        - asset: assets/fonts/Nunito-Black.ttf
+        - asset: assets/fonts/Nunito-BlackItalic.ttf
+        - asset: assets/fonts/Nunito-Bold.ttf
+        - asset: assets/fonts/Nunito-BoldItalic.ttf
+        - asset: assets/fonts/Nunito-ExtraBold.ttf
+        - asset: assets/fonts/Nunito-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Nunito-Italic.ttf
+        - asset: assets/fonts/Nunito-Light.ttf
+        - asset: assets/fonts/Nunito-LightItalic.ttf
+        - asset: assets/fonts/Nunito-Medium.ttf
+        - asset: assets/fonts/Nunito-MediumItalic.ttf
+        - asset: assets/fonts/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito-SemiBold.ttf
+        - asset: assets/fonts/Nunito-SemiBoldItalic.ttf
 
   #
   # For details regarding fonts from package dependencies,
