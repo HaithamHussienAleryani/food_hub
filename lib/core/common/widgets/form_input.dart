@@ -8,6 +8,8 @@ class FormInput extends StatelessWidget {
   final TextInputType inputType;
   final TextEditingController? controller;
   final bool isObSecure, hideTitle;
+  final Function? onChange;
+  final FocusNode? focusNode;
 
   const FormInput(
       {super.key,
@@ -15,7 +17,9 @@ class FormInput extends StatelessWidget {
       this.controller,
       this.inputType = TextInputType.text,
       this.isObSecure = false,
-      this.hideTitle = false});
+      this.hideTitle = false,
+      this.onChange,
+      this.focusNode});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +36,12 @@ class FormInput extends StatelessWidget {
         ],
         TextFormField(
           controller: controller,
+          focusNode: focusNode ?? FocusNode(),
+          onChanged: (e) {
+            if (onChange != null) {
+              onChange!(e);
+            }
+          },
           keyboardType: inputType,
           obscureText: isObSecure,
           cursorColor: AppPallet.inputHint,
