@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_hub/core/common/constants/images/images_constants.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/core/utils/get_translation.dart';
 
 class Appbar extends StatefulWidget {
   final AnimationController controller;
@@ -50,7 +51,7 @@ class _AppbarState extends State<Appbar> {
               Row(
                 children: [
                   Text(
-                    "Deliver To",
+                    getTranslation(context).deliverTo,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: AppPallet.textLightColor,
@@ -64,7 +65,7 @@ class _AppbarState extends State<Appbar> {
                 ],
               ),
               Text(
-                'Choose place to deliver',
+                getTranslation(context).choosePlaceToDeliver,
                 style: TextStyle(fontSize: 13.sp),
               ),
             ],

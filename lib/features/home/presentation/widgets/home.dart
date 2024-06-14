@@ -1,16 +1,17 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_hub/core/common/constants/animations/animation_constant.dart';
-import 'package:food_hub/core/common/constants/images/images_constants.dart';
 import 'package:food_hub/core/common/widgets/horizontal_space.dart';
 import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/core/utils/get_translation.dart';
 import 'package:food_hub/features/home/presentation/widgets/appbar.dart';
-import 'package:food_hub/features/home/presentation/widgets/category_card.dart';
-import 'package:food_hub/features/home/presentation/widgets/featured_restaurant_card.dart';
-import 'package:food_hub/features/home/presentation/widgets/meal_card.dart';
-import 'package:food_hub/features/home/presentation/widgets/offer_card.dart';
+import 'package:food_hub/features/home/presentation/widgets/featured_restaurants.dart';
+import 'package:food_hub/features/home/presentation/widgets/home_categories.dart';
+import 'package:food_hub/features/home/presentation/widgets/home_offers.dart';
+import 'package:food_hub/features/home/presentation/widgets/home_search.dart';
+import 'package:food_hub/features/home/presentation/widgets/pupular_food.dart';
+import 'package:food_hub/features/home/presentation/widgets/restaurants_nearby.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -34,10 +35,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  //TODO FIND FOOD NEAR ME
-  //TODO TRANSLATE ALL PREVIOUS WORK
   //TODO CREATE SEARCH FULL PAGE MODAL SHEET
-  //TODO MAKE ALL SECTIONS A COMPONENTS
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
@@ -78,7 +76,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     child: SizedBox(
                       width: 0.70.sw,
                       child: Text(
-                        "What would you like to order",
+                        getTranslation(context).whatWouldYouLikeToOrder,
                         style: TextStyle(
                             height: 1.7.h,
                             fontSize: 20.sp,
@@ -87,32 +85,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ),
                   VerticalSpace(space: 19.h),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.h, horizontal: 10.w),
-                      decoration: BoxDecoration(
-                          color: AppPallet.inputColor,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.r))),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.search,
-                            size: 25.sp,
-                            color: AppPallet.inputHint,
-                          ),
-                          HorizontalSpace(space: 5.w),
-                          Text(
-                            'Find food or restaurants..',
-                            style: TextStyle(
-                                fontSize: 13.sp, color: AppPallet.inputHint),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  const HomeSearch(),
                   VerticalSpace(space: 20.h),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -121,7 +94,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       child: Row(
                         children: [
                           Text(
-                            "Offers of the day",
+                            getTranslation(context).offersOfTheDay,
                             style: TextStyle(
                                 height: 1.7.h,
                                 fontSize: 20.sp,
@@ -135,63 +108,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ),
                   VerticalSpace(space: 19.h),
-                  SizedBox(
-                    height: 200.h,
-                    child: CarouselSlider(
-                        options: CarouselOptions(
-                            height: 400.0,
-                            autoPlay: widget.isCollapsed,
-                            enlargeCenterPage: true,
-                            disableCenter: true,
-                            animateToClosest: true),
-                        items: const [
-                          OfferCard(
-                            offer: offerOne,
-                          ),
-                          OfferCard(
-                            offer: offerTwo,
-                          ),
-                          OfferCard(
-                            offer: offerThree,
-                          ),
-                        ]),
-                  ),
+                  HomeOffers(widget: widget),
                   VerticalSpace(space: 20.h),
-                  SizedBox(
-                    height: 145.h,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      physics: !widget.isCollapsed
-                          ? const NeverScrollableScrollPhysics()
-                          : const ClampingScrollPhysics(),
-                      child: const Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CategoryCard(
-                            icon: burger,
-                            isActive: true,
-                            title: 'Burger',
-                          ),
-                          CategoryCard(
-                            icon: burger,
-                            title: 'Donat',
-                          ),
-                          CategoryCard(
-                            icon: burger,
-                            title: 'Pizza',
-                          ),
-                          CategoryCard(
-                            icon: burger,
-                            title: 'Mexican',
-                          ),
-                          CategoryCard(
-                            icon: burger,
-                            title: 'Asian',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  HomeCategories(widget: widget),
+                  const RestaurantsNearby(),
+                  VerticalSpace(space: 20.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
@@ -199,12 +120,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Featured Restaurants',
+                          getTranslation(context).featuredRestaurants,
                           style: TextStyle(
                               fontSize: 18.sp, fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          "View all",
+                          getTranslation(context).viewAll,
                           style: TextStyle(
                               fontSize: 13.sp, color: AppPallet.primary),
                         ),
@@ -212,21 +133,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ),
                   VerticalSpace(space: 15.h),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: SizedBox(
-                      height: 310.h,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const FeaturedRestaurantCard(),
-                          const FeaturedRestaurantCard(),
-                          const FeaturedRestaurantCard(),
-                          HorizontalSpace(space: 16.w),
-                        ],
-                      ),
-                    ),
-                  ),
+                  const FeaturedRestaurants(),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
@@ -234,12 +141,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Popular items',
+                          getTranslation(context).popularItems,
                           style: TextStyle(
                               fontSize: 18.sp, fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          "View all",
+                          getTranslation(context).viewAll,
                           style: TextStyle(
                               fontSize: 13.sp, color: AppPallet.primary),
                         ),
@@ -247,21 +154,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ),
                   VerticalSpace(space: 15.h),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: SizedBox(
-                      height: 300.h,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const MealCard(),
-                          const MealCard(),
-                          const MealCard(),
-                          HorizontalSpace(space: 16.w),
-                        ],
-                      ),
-                    ),
-                  ),
+                  const PopularFood(),
                 ],
               ),
             ),

@@ -10,6 +10,17 @@
   "alreadyHaveAccount": "Already have an account? ",
   "signUp": "Sign Up",
   "signUpWith": "Sign Up With",
-  "doNotHaveAccount": "Don't have an account? "
+  "doNotHaveAccount": "Don't have an account? ",
+  "deliverTo": "Deliver to",
+  "choosePlaceToDeliver": "Choose place to deliver",
+  "whatWouldYouLikeToOrder": "What would you like to order",
+  "findFoodOrRestaurants": "Find restaurants",
+  "offersOfTheDay": "offers of the day",
+  "starving": "Starving? Find Restaurants Near You Now",
+  "featuredRestaurants": "Featured restaurants",
+  "popularItems": "Popular items",
+  "viewAll": "view all",
+  "browseAll": "Browser all"
+
 
 }

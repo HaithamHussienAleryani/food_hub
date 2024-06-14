@@ -10,5 +10,17 @@
   "startWithEmail": " او ابداء بواسطة البريد الالكتروني",
   "alreadyHaveAccount": "لديك حساب مسبقا؟ ",
   "signUp": "انشاء حساب",
-  "doNotHaveAccount": "ليس لديك حساب ؟ "
+  "doNotHaveAccount": "ليس لديك حساب ؟ ",
+  "deliverTo": "توصيل الى",
+  "choosePlaceToDeliver": "حدد عنوان التوصيل",
+  "whatWouldYouLikeToOrder": "ماذا تريد ان تطلب",
+  "findFoodOrRestaurants": "اعثر على المطاعم",
+  "offersOfTheDay": "عروض اليوم",
+  "starving": "جائع؟ اعثر على المطاعم القريبة منك",
+  "featuredRestaurants": "مطاعم مميزة",
+  "popularItems": "وجبات شائعة",
+  "viewAll": "عرض الكل",
+  "browseAll": "تصفح الكل "
+
+
 }

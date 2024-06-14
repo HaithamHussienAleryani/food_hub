@@ -76,7 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             },
                             builder: (context, state) {
                               return AuthButton(
-                                title: AppLocalizations.of(context)!
+                                title: getTranslation(context)
                                     .signUp
                                     .toUpperCase(),
                                 state: state,

@@ -13,7 +13,7 @@ class FeaturedRestaurantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(left: 18.w),
+        margin: EdgeInsets.only(left: 18.w, bottom: 33.h),
         decoration: BoxDecoration(
             color: AppPallet.whiteColor,
             borderRadius: BorderRadius.circular(15.r),
