@@ -43,10 +43,11 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: AppPallet.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
+      constraints: BoxConstraints(minHeight: 55.h, maxHeight: 55.h),
       enabledBorder: _border(),
       hintStyle: TextStyle(
-          fontSize: 14.sp,
+          fontSize: 12.sp,
           fontWeight: FontWeight.w500,
           color: AppPallet.inputHint),
       focusedBorder: _border(color: AppPallet.primary),

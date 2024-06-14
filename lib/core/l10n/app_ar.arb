@@ -20,7 +20,9 @@
   "featuredRestaurants": "مطاعم مميزة",
   "popularItems": "وجبات شائعة",
   "viewAll": "عرض الكل",
-  "browseAll": "تصفح الكل "
+  "browseAll": "تصفح الكل ",
+  "fullAddress": "العنوان بالكامل",
+  "addressName": "اسم العنوان"
 
 
 }

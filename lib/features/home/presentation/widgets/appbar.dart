@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_hub/core/common/constants/images/images_constants.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 import 'package:food_hub/core/utils/get_translation.dart';
+import 'package:food_hub/features/home/presentation/widgets/pick_location_bottomsheet.dart';
 
 class Appbar extends StatefulWidget {
   final AnimationController controller;
@@ -46,29 +47,35 @@ class _AppbarState extends State<Appbar> {
         AnimatedScale(
           scale: widget.isCollapsed ? 1 : 0.7,
           duration: const Duration(milliseconds: 300),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    getTranslation(context).deliverTo,
-                    style: TextStyle(
-                      fontSize: 14.sp,
+          child: GestureDetector(
+            onTap: () => showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => const PickLocationBottomSheet()),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      getTranslation(context).deliverTo,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppPallet.textLightColor,
+                      ),
+                    ),
+                    Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 25.w,
                       color: AppPallet.textLightColor,
                     ),
-                  ),
-                  Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    size: 25.w,
-                    color: AppPallet.textLightColor,
-                  ),
-                ],
-              ),
-              Text(
-                getTranslation(context).choosePlaceToDeliver,
-                style: TextStyle(fontSize: 13.sp),
-              ),
-            ],
+                  ],
+                ),
+                Text(
+                  getTranslation(context).choosePlaceToDeliver,
+                  style: TextStyle(fontSize: 13.sp),
+                ),
+              ],
+            ),
           ),
         ),
         Card(

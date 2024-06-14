@@ -20,7 +20,9 @@
   "featuredRestaurants": "Featured restaurants",
   "popularItems": "Popular items",
   "viewAll": "view all",
-  "browseAll": "Browser all"
+  "browseAll": "Browser all",
+  "addressName": "Address name",
+  "fullAddress": "Full address"
 
 
 }

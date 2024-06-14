@@ -3,30 +3,33 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 
-class AuthInput extends StatelessWidget {
+class FormInput extends StatelessWidget {
   final String title;
   final TextInputType inputType;
   final TextEditingController? controller;
-  final bool isObSecure;
-  const AuthInput({
-    super.key,
-    required this.title,
-    this.controller,
-    this.inputType = TextInputType.text,
-    this.isObSecure = false,
-  });
+  final bool isObSecure, hideTitle;
+
+  const FormInput(
+      {super.key,
+      required this.title,
+      this.controller,
+      this.inputType = TextInputType.text,
+      this.isObSecure = false,
+      this.hideTitle = false});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VerticalSpace(space: 20.h),
-        Text(
-          title,
-          style: TextStyle(fontSize: 15.sp, color: AppPallet.inputTitle),
-        ),
-        VerticalSpace(space: 8.h),
+        if (!hideTitle) ...[
+          VerticalSpace(space: 20.h),
+          Text(
+            title,
+            style: TextStyle(fontSize: 15.sp, color: AppPallet.inputTitle),
+          ),
+          VerticalSpace(space: 8.h),
+        ],
         TextFormField(
           controller: controller,
           keyboardType: inputType,

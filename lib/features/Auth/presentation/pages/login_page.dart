@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_hub/core/common/widgets/form_input.dart';
 import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 import 'package:food_hub/core/utils/get_translation.dart';
 import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:food_hub/features/Auth/presentation/widgets/auth_bubble.dart';
 import 'package:food_hub/features/Auth/presentation/widgets/auth_button.dart';
-import 'package:food_hub/features/Auth/presentation/widgets/auth_input.dart';
 import 'package:food_hub/features/Auth/presentation/widgets/dont_have_account.dart';
 import 'package:food_hub/features/Auth/presentation/widgets/social_media_sign_up.dart';
 
@@ -49,12 +49,12 @@ class _LoginPageState extends State<LoginPage> {
                       key: key,
                       child: Column(
                         children: [
-                          AuthInput(
+                          FormInput(
                             controller: email,
                             title: "Email",
                             inputType: TextInputType.emailAddress,
                           ),
-                          AuthInput(
+                          FormInput(
                             controller: password,
                             title: "Password",
                             isObSecure: true,
