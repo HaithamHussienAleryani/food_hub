@@ -6,6 +6,8 @@ import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
 import 'package:food_hub/core/utils/get_translation.dart';
 import 'package:food_hub/features/home/presentation/widgets/pick_location_item.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mapbox_search/mapbox_search.dart';
 
 class PickLocationBottomSheet extends StatefulWidget {
   const PickLocationBottomSheet({super.key});
@@ -22,9 +24,40 @@ class _PickLocationBottomSheetState extends State<PickLocationBottomSheet> {
   FocusNode focusNode = FocusNode();
   ScrollController scrollController = ScrollController();
 
+  var geocoding = GeoCoding(
+    country: "YE",
+    limit: 5,
+    types: [PlaceType.address, PlaceType.place],
+  );
+
+  Future<ApiResponse<List<MapBoxPlace>>> getPlaces() {
+    return geocoding.getPlaces(
+      "Sanaa",
+    );
+  }
+
+  void getPlacesLocations() async {
+    SearchBoxAPI search = SearchBoxAPI(limit: 6, country: 'SA', types: [
+      PlaceType.place,
+      PlaceType.address,
+    ]);
+    ApiResponse<SuggestionResponse> searchPlace = await search.getSuggestions(
+      "coffee",
+    );
+    searchPlace.fold((success) {
+      debugPrint(success.suggestions.toString());
+      for (var suggestion in success.suggestions) {
+        debugPrint("${suggestion.name}\n${suggestion.fullAddress}");
+      }
+    }, (failure) {
+      debugPrint(failure.error ?? "Error");
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(seconds: 3), getPlacesLocations);
     focusNode.addListener(() {
       if (!focusNode.hasFocus) {
         setState(() {
@@ -48,12 +81,12 @@ class _PickLocationBottomSheetState extends State<PickLocationBottomSheet> {
         height: 0.9.sh,
         width: 1.sw,
         decoration: const BoxDecoration(color: AppPallet.whiteColor),
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: Padding(
-            padding: EdgeInsets.all(16.sp),
-            child: SizedBox(
-              height: 1.sh,
+        child: Padding(
+          padding: EdgeInsets.all(16.sp),
+          child: SizedBox(
+            height: 1.sh,
+            child: SingleChildScrollView(
+              controller: scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -72,7 +105,7 @@ class _PickLocationBottomSheetState extends State<PickLocationBottomSheet> {
                         end: 0,
                         child: InkWell(
                             overlayColor: WidgetStateColor.transparent,
-                            onTap: () => {},
+                            onTap: () => {context.pop()},
                             child: Text(
                               "cancel",
                               style: TextStyle(
@@ -108,6 +141,7 @@ class _PickLocationBottomSheetState extends State<PickLocationBottomSheet> {
                               },
                             ),
                           ),
+                          VerticalSpace(space: 15.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -166,7 +200,7 @@ class _PickLocationBottomSheetState extends State<PickLocationBottomSheet> {
                         ],
                       ),
                       Positioned(
-                        top: 55.h,
+                        top: 50,
                         left: 0,
                         right: 0,
                         child: AnimatedContainer(
@@ -180,8 +214,8 @@ class _PickLocationBottomSheetState extends State<PickLocationBottomSheet> {
                             duration: const Duration(milliseconds: 300),
                             child: Card(
                               shadowColor:
-                                  AppPallet.shadowColor.withOpacity(0.5),
-                              elevation: 20,
+                                  AppPallet.shadowColor.withOpacity(0.3),
+                              elevation: 10,
                               color: AppPallet.whiteColor,
                               child: ListView(
                                 shrinkWrap: true,
@@ -252,6 +286,7 @@ class MyLocationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      minTileHeight: 50.h,
       title: Text(
         name,
         style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
@@ -266,7 +301,7 @@ class MyLocationItem extends StatelessWidget {
           ? Icon(
               Icons.location_on,
               size: 25.sp,
-              color: !selected ? Colors.black : AppPallet.primary,
+              color: !selected ? Colors.black12 : AppPallet.primary,
             )
           : const SizedBox(),
     );

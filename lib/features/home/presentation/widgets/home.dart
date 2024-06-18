@@ -35,7 +35,6 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  //TODO CREATE SEARCH FULL PAGE MODAL SHEET
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(

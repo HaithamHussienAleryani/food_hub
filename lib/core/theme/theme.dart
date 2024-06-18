@@ -44,7 +44,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppPallet.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
-      constraints: BoxConstraints(minHeight: 55.h, maxHeight: 55.h),
+      constraints: const BoxConstraints(minHeight: 55, maxHeight: 55),
       enabledBorder: _border(),
       hintStyle: TextStyle(
           fontSize: 12.sp,

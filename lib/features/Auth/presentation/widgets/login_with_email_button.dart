@@ -17,7 +17,7 @@ class LoginWithEmailButton extends StatelessWidget {
       },
       child: Container(
         width: 1.sw,
-        padding: EdgeInsets.symmetric(vertical: 15.h),
+        padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
             color: AppPallet.whiteColor.withOpacity(0.21),
             borderRadius: BorderRadius.circular(27),
