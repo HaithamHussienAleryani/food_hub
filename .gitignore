@@ -48,4 +48,4 @@ app.*.map.json
 
 #root
 /firebase.json
-*.env
+/*.env

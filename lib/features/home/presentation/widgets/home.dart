@@ -77,9 +77,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       child: Text(
                         getTranslation(context).whatWouldYouLikeToOrder,
                         style: TextStyle(
-                            height: 1.7.h,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w900),
+                            fontSize: 20.sp, fontWeight: FontWeight.w900),
                       ),
                     ),
                   ),

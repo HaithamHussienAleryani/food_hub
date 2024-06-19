@@ -7,6 +7,7 @@ import 'package:food_hub/features/Auth/data/repositories/auth_repository_impl.da
 import 'package:food_hub/features/Auth/domain/repositories/auth_repository.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_get_session.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_login_via_email_and_password.dart';
+import 'package:food_hub/features/Auth/domain/usecases/user_sign_out.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_sign_up_via_email_and_password.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_sign_up_via_google.dart';
 import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
@@ -37,10 +38,12 @@ void _authInit() {
     ..registerFactory(() => UserSignUpViaEmailAndPassword(serviceLocator()))
     ..registerFactory(() => UserLoginViaEmailAndPassword(serviceLocator()))
     ..registerFactory(() => UserGetSession(serviceLocator()))
+    ..registerFactory(() => UserSignOut(serviceLocator()))
     ..registerLazySingleton<AuthBloc>(() => AuthBloc(
         userSignUpViaGoogle: serviceLocator(),
         userSignupUsingViaEmailAndPassword: serviceLocator(),
         userLoginViaEmailAndPassword: serviceLocator(),
         userCubit: serviceLocator(),
+        userSignOut: serviceLocator(),
         userGetSession: serviceLocator()));
 }

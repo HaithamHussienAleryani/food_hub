@@ -11,6 +11,7 @@ abstract interface class AuthRemoteDataSource {
       {required String email, required String password, required String name});
   Future<User?> loginWithEmailAndPassword(
       {required String email, required String password});
+  Future<void> logout();
   Future<User?> getUserSession();
   Future<void> getUserDocument({required User? user});
   Future<void> setUserDocument({
@@ -83,16 +84,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<User?> loginWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      if (user == null) {
-        throw const ServerException("User is not found");
-      }
-
       final credential = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
 
       return credential.user;
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message ?? "Firebase Error");
+    } on ServerException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -147,6 +146,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     } on ServerException catch (e) {
       debugPrint(e.message);
       throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> logout() async {
+    try {
+      firebaseAuth.signOut().then((onValue) {
+        debugPrint("User signed out successfully");
+      });
     } catch (e) {
       throw ServerException(e.toString());
     }

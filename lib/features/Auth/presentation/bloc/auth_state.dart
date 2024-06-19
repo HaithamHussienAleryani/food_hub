@@ -11,6 +11,8 @@ final class AuthLoadingViaGoogle extends AuthState {}
 
 final class AuthLoadingViaEmail extends AuthState {}
 
+final class AuthSignOut extends AuthState {}
+
 final class AuthLoadingViaEmailLogin extends AuthState {}
 
 final class AuthSuccess extends AuthState {

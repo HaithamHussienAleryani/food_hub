@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:food_hub/core/errors/exceptions.dart';
 import 'package:food_hub/core/errors/failures.dart';
 import 'package:food_hub/features/Auth/data/data_sources/auth_remote_data_source.dart';
@@ -38,6 +39,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return right(await authRemoteDataSource.loginWithEmailAndPassword(
           email: email, password: password));
     } on ServerException catch (e) {
+      debugPrint("Failure is ${e.message}");
       return left(Failure(e.message));
     }
   }
@@ -46,6 +48,15 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, User?>> getUserSession() async {
     try {
       return right(await authRemoteDataSource.getUserSession());
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> signOut() async {
+    try {
+      return right(await authRemoteDataSource.logout());
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

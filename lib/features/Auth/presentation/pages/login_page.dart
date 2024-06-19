@@ -62,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                           VerticalSpace(space: 31.h),
                           BlocConsumer<AuthBloc, AuthState>(
                             listener: (context, state) {
+                              debugPrint(state.toString());
                               if (state is AuthFailed) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(

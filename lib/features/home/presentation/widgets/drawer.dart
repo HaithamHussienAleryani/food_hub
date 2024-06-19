@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_hub/core/common/constants/images/images_constants.dart';
 import 'package:food_hub/core/common/widgets/horizontal_space.dart';
 import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/core/widgets/loader.dart';
+import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:food_hub/features/home/presentation/widgets/drawer_list_item.dart';
+import 'package:go_router/go_router.dart';
 
 class AnimatedDrawer extends StatefulWidget {
   final Animation<double> menuScaleAnimation;
   final Animation<Offset> slideAnimation;
+
   const AnimatedDrawer(
       {super.key,
       required this.menuScaleAnimation,
@@ -104,35 +109,53 @@ class _AnimatedDrawerState extends State<AnimatedDrawer> {
                   ),
                   VerticalSpace(space: 20.h),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<AuthBloc>().add(AuthSignOutUser());
+                    },
                     style: ButtonStyle(
                       elevation: const WidgetStatePropertyAll(10),
                       padding: WidgetStatePropertyAll(EdgeInsets.symmetric(
                           vertical: 2.h, horizontal: 12.w)),
+                      fixedSize: WidgetStatePropertyAll(Size(0.35.sw, 30)),
                       shadowColor: WidgetStatePropertyAll(
                           AppPallet.shadowColor.withOpacity(0.26)),
                       backgroundColor:
                           const WidgetStatePropertyAll(AppPallet.primary),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.power_settings_new,
-                          color: AppPallet.whiteColor,
-                          size: 20.sp,
-                        ),
-                        HorizontalSpace(space: 9.w),
-                        Text(
-                          "Log Out",
-                          style: TextStyle(
-                              fontSize: 14.sp,
-                              letterSpacing: 1,
-                              color: AppPallet.whiteColor),
-                        ),
-                      ],
+                    child: BlocConsumer<AuthBloc, AuthState>(
+                      listener: (context, state) {
+                        if (state is AuthSignOut) {
+                          context.go('/onboarding/login');
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is AuthLoadingViaEmailLogin) {
+                          return const Loader(
+                            color: Colors.white,
+                          );
+                        } else {
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.power_settings_new,
+                                color: AppPallet.whiteColor,
+                                size: 20.sp,
+                              ),
+                              HorizontalSpace(space: 9.w),
+                              Text(
+                                "Log Out",
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    letterSpacing: 1,
+                                    color: AppPallet.whiteColor),
+                              ),
+                            ],
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

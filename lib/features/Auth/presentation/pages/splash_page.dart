@@ -16,20 +16,13 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Future<void> signOut() async {
-    // await FirebaseAuth.instance.signOut().then((value) {
-    //
-    // });
+  @override
+  void initState() {
+    super.initState();
     context.read<AuthBloc>().add(AuthGetUserSession());
     Future.delayed(const Duration(seconds: 5), () {
       context.goNamed('onboarding');
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    signOut();
   }
 
   @override
