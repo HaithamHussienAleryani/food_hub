@@ -14,7 +14,7 @@ import 'package:food_hub/features/home/presentation/widgets/pupular_food.dart';
 import 'package:food_hub/features/home/presentation/widgets/restaurants_nearby.dart';
 import 'package:lottie/lottie.dart';
 
-class HomeWidget extends StatefulWidget {
+class HomeWidget extends StatelessWidget {
   final Duration duration;
   final double screenWidth;
   final bool isCollapsed;
@@ -31,29 +31,24 @@ class HomeWidget extends StatefulWidget {
       required this.onTap});
 
   @override
-  State<HomeWidget> createState() => _HomeWidgetState();
-}
-
-class _HomeWidgetState extends State<HomeWidget> {
-  @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-      duration: widget.duration,
+      duration: duration,
       top: 0,
       bottom: 0,
-      left: widget.isCollapsed ? 0 : 0.6 * widget.screenWidth,
-      right: widget.isCollapsed ? 0 : -0.2 * widget.screenWidth,
+      left: isCollapsed ? 0 : 0.6 * screenWidth,
+      right: isCollapsed ? 0 : -0.2 * screenWidth,
       child: ScaleTransition(
-        scale: widget.scaleAnimation,
+        scale: scaleAnimation,
         child: Material(
-          animationDuration: widget.duration,
+          animationDuration: duration,
           color: AppPallet.scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(widget.isCollapsed ? 0 : 25.r),
+          borderRadius: BorderRadius.circular(isCollapsed ? 0 : 25.r),
           elevation: 20,
           shadowColor: AppPallet.shadowColor.withOpacity(0.2),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            physics: !widget.isCollapsed
+            physics: !isCollapsed
                 ? const NeverScrollableScrollPhysics()
                 : const ClampingScrollPhysics(),
             child: Container(
@@ -64,9 +59,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Appbar(
-                      isCollapsed: widget.isCollapsed,
-                      controller: widget.controller,
-                      onTap: widget.onTap,
+                      isCollapsed: isCollapsed,
+                      controller: controller,
+                      onTap: onTap,
                     ),
                   ),
                   VerticalSpace(space: 32.h),
@@ -105,9 +100,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ),
                   VerticalSpace(space: 19.h),
-                  HomeOffers(widget: widget),
+                  HomeOffers(isCollapsed: isCollapsed),
                   VerticalSpace(space: 20.h),
-                  HomeCategories(widget: widget),
+                  HomeCategories(isCollapsed: isCollapsed),
                   const RestaurantsNearby(),
                   VerticalSpace(space: 20.h),
                   Padding(

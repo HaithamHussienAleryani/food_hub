@@ -11,6 +11,12 @@ import 'package:food_hub/features/Auth/domain/usecases/user_sign_out.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_sign_up_via_email_and_password.dart';
 import 'package:food_hub/features/Auth/domain/usecases/user_sign_up_via_google.dart';
 import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:food_hub/features/home/data/data_sources/home_remote_data_source.dart';
+import 'package:food_hub/features/home/data/repositories/home_repository_impl.dart';
+import 'package:food_hub/features/home/domain/repositories/home_repository.dart';
+import 'package:food_hub/features/home/domain/usecases/home_get_categories.dart';
+import 'package:food_hub/features/home/domain/usecases/home_get_offers.dart';
+import 'package:food_hub/features/home/presentation/bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance;
@@ -19,6 +25,7 @@ Future<void> initDependencies() async {
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
   _authInit();
+  _homeInit();
   serviceLocator.registerLazySingleton(() => NetworkCheck());
   serviceLocator.registerLazySingleton(() => firebaseAuth);
   serviceLocator.registerLazySingleton(() => fireStore);
@@ -46,4 +53,19 @@ void _authInit() {
         userCubit: serviceLocator(),
         userSignOut: serviceLocator(),
         userGetSession: serviceLocator()));
+}
+
+void _homeInit() {
+  //datasource
+  serviceLocator
+    ..registerFactory<HomeRemoteDataSource>(
+        () => HomeRemoteDataSourceImpl(serviceLocator()))
+    //repository
+    ..registerFactory<HomeRepository>(
+        () => HomeRepositoryImpl(serviceLocator()))
+    //useCases
+    ..registerFactory(() => HomeGetOffers(serviceLocator()))
+    ..registerFactory(() => HomeGetCategories(serviceLocator()))
+    ..registerLazySingleton<HomeBloc>(() => HomeBloc(
+        homeOffers: serviceLocator(), homeCategories: serviceLocator()));
 }

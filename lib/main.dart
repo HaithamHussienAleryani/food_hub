@@ -9,6 +9,7 @@ import 'package:food_hub/core/common/cubits/user_cubit/user_cubit.dart';
 import 'package:food_hub/core/routing/router.dart';
 import 'package:food_hub/core/theme/theme.dart';
 import 'package:food_hub/features/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:food_hub/features/home/presentation/bloc/home_bloc.dart';
 import 'package:food_hub/firebase_options.dart';
 import 'package:food_hub/init_dependencies.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as map;
@@ -32,7 +33,8 @@ void main() async {
     BlocProvider(
       create: (_) => serviceLocator<UserCubit>(),
     ),
-    BlocProvider(create: (_) => serviceLocator<AuthBloc>())
+    BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
+    BlocProvider(create: (_) => serviceLocator<HomeBloc>())
   ], child: const FoodHub()));
 }
 

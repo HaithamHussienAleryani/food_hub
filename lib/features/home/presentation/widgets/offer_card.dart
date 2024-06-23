@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/features/home/data/models/OfferModel.dart';
 
 class OfferCard extends StatelessWidget {
-  final String offer;
+  final OfferModel offer;
   const OfferCard({
     super.key,
     required this.offer,
@@ -18,7 +20,9 @@ class OfferCard extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
               image: DecorationImage(
-                  image: AssetImage(offer),
+                  image: CachedNetworkImageProvider(
+                    offer.image!,
+                  ),
                   fit: BoxFit.fill,
                   alignment: Alignment.topCenter)),
           child: const Banner(

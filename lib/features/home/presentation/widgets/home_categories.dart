@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food_hub/core/common/constants/images/images_constants.dart';
+import 'package:food_hub/features/home/presentation/bloc/home_bloc.dart';
 import 'package:food_hub/features/home/presentation/widgets/category_card.dart';
-import 'package:food_hub/features/home/presentation/widgets/home.dart';
 
-class HomeCategories extends StatelessWidget {
+class HomeCategories extends StatefulWidget {
   const HomeCategories({
     super.key,
-    required this.widget,
+    required this.isCollapsed,
   });
 
-  final HomeWidget widget;
+  final bool isCollapsed;
+
+  @override
+  State<HomeCategories> createState() => _HomeCategoriesState();
+}
+
+class _HomeCategoriesState extends State<HomeCategories> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(HomeGetCategoriesEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,31 +32,19 @@ class HomeCategories extends StatelessWidget {
         physics: !widget.isCollapsed
             ? const NeverScrollableScrollPhysics()
             : const ClampingScrollPhysics(),
-        child: const Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CategoryCard(
-              icon: burger,
-              isActive: true,
-              title: 'Burger',
-            ),
-            CategoryCard(
-              icon: burger,
-              title: 'Donat',
-            ),
-            CategoryCard(
-              icon: burger,
-              title: 'Pizza',
-            ),
-            CategoryCard(
-              icon: burger,
-              title: 'Mexican',
-            ),
-            CategoryCard(
-              icon: burger,
-              title: 'Asian',
-            ),
-          ],
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: state is HomeGetCategoriesSuccess
+                  ? state.categories
+                      .map((category) => CategoryCard(
+                            categoryModel: category,
+                          ))
+                      .toList()
+                  : [],
+            );
+          },
         ),
       ),
     );

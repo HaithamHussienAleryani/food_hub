@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_hub/core/common/widgets/vertical_space.dart';
 import 'package:food_hub/core/theme/app_platte.dart';
+import 'package:food_hub/features/home/data/models/CategoryModel.dart';
 
 class CategoryCard extends StatelessWidget {
-  final String icon, title;
+  final CategoryModel categoryModel;
   final bool isActive;
   const CategoryCard({
     super.key,
-    required this.icon,
     this.isActive = false,
-    required this.title,
+    required this.categoryModel,
   });
 
   @override
@@ -38,7 +38,7 @@ class CategoryCard extends StatelessWidget {
                     border: Border.all(color: AppPallet.primary),
                     color: AppPallet.whiteColor,
                   ),
-                  child: SvgPicture.asset(icon,
+                  child: SvgPicture.network(categoryModel.image!,
                       height: 32.h,
                       width: 32.h,
                       colorFilter: const ColorFilter.mode(
@@ -47,7 +47,7 @@ class CategoryCard extends StatelessWidget {
               ),
               VerticalSpace(space: 10.h),
               Text(
-                title,
+                categoryModel.name!,
                 style: TextStyle(
                     fontSize: 11.sp,
                     color: isActive ? AppPallet.whiteColor : Colors.black),
